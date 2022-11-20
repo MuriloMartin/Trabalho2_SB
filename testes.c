@@ -18,7 +18,7 @@ void writePar(int n, int line, unsigned char codigo[]);
 int main(void)
 {
 
-    FILE *fp = fopen("implementacao3.txt", "r");
+    FILE *fp = fopen("implementacao5.txt", "r");
     unsigned char Vetor[MAXT];
     geraCodigo(fp, Vetor);
     return 0;
@@ -44,7 +44,7 @@ funcp geraCodigo(FILE *f, unsigned char codigo[])
     codigo[i++] = 0x20;
     while ((c = fgetc(f)) != EOF)
     {
-        // printf("%c\n",c); //verificando se estava lendo letra por letra
+        printf("%c\n",c); 
         switch (c)
         {
         case 'r':;
@@ -101,7 +101,34 @@ funcp geraCodigo(FILE *f, unsigned char codigo[])
                     i += 4;
                     break;
                 }
-                
+                case 'v':
+                { // atribuição de variável
+                    codigo[i++] = 0x44;
+                    codigo[i++] = 0x8b;
+                    codigo[i++] = 0x55;
+                    writeLocalVar(IntVal1, line, codigo);
+                    codigo[i++] = 0x44;
+                    codigo[i++] = 0x89;
+                    codigo[i++] = 0x55;
+                    writeLocalVar(IntVal1, line, codigo);
+                    break;
+                }
+                case 'p':
+                {
+                    if (IntVal1 > MAXPAR)
+                        error("Numero máximo de paremetros atingido", line);
+                    codigo[i++] = 0x89;
+                    switch (IntVal1)
+                    {
+                    case 1: // primeiro parâmetro
+                        codigo[i++] = 0x7d;
+                        break;
+                    case 2: // segundo parâmetro
+                        codigo[i++] = 0x75;
+                        break;
+                   
+                    }
+                }
                 }
                 
                 break;
@@ -112,14 +139,14 @@ funcp geraCodigo(FILE *f, unsigned char codigo[])
             }
         }
 
-        for (int c = 0; c < 15; c++)
+    }
+        for (int c = 0; c < 14; c++)
         {
 
             printf("%hhx ", codigo[c]);
         }
         printf("\n\ni: %d", i);
         return Funcp;
-    }
 }
     void writeLocalVar(int n, int line, unsigned char codigo[])
     {
