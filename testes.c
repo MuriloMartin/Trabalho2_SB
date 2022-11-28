@@ -14,7 +14,6 @@ funcp geraCodigo(FILE *f, unsigned char codigo[]);
 static void error(const char *msg, int line);
 void writeLocalVar(int n, int line, unsigned char codigo[]);
 void writePar(int n, int line, unsigned char codigo[]);
-void operacao(char c,char operador, int IntVa2l, char var2, unsigned char *codigo);
 // Mainnnnnnnnn////////////////////////////////////////////
 int main(void)
 {
@@ -43,7 +42,7 @@ funcp geraCodigo(FILE *f, unsigned char codigo[])
     codigo[i++] = 0x48;
     codigo[i++] = 0x83;
     codigo[i++] = 0xec;
-    codigo[i++] = 0x20;
+    codigo[i++] = 0x10;
     bytesPerLine[0] = i+1;
     while ((c = fgetc(f)) != EOF)
     {
@@ -218,7 +217,7 @@ funcp geraCodigo(FILE *f, unsigned char codigo[])
                             codigo[i++] = 0x0f;
                             codigo[i++] = 0xaf;     //45 0f af c1
                             codigo[i++] = 0xc1;
-                            
+
                             codigo[i++] = 0x44;
                             codigo[i++] = 0x89;
                             codigo[i++] = 0x45;
@@ -349,6 +348,10 @@ funcp geraCodigo(FILE *f, unsigned char codigo[])
                 }
                 break;
 
+            case 'p':
+                //fazer operação e atribuição, vai ser muito parecido com o case "v"
+                break;
+
             case 'g':;
                 int nLinha;
                 if (fscanf(f, "o %d", &nLinha) != 1)
@@ -405,18 +408,3 @@ void writePar(int n, int line, unsigned char codigo[])
         codigo[i++] = 0xf0;
 }
 
-void operacao(char c,char operador, int IntVa2l, char var2, unsigned char *codigo)
-{
-    switch (var2)
-    {
-    case 'v':
-        printf("caso variavel");
-        break;
-    case 'p':
-        printf("caso parametro");
-        break;
-    case '$':
-        printf("caso constante");
-        break;
-    }
-}
