@@ -1,0 +1,55 @@
+﻿Software Básico: Relatório Trabalho 2
+Alunos: Murilo Martin (1921063) Stella Maranhão (2111494)
+Professor: Alexandre Meslin
+Turma: 3wb
+
+
+Outro compilador muito simples
+Variáveis no RA:
+* v1 está no -4(%rbp)
+* v2 está no -8(%rbp)
+* v3 está no -12(%rbp)
+* v4 está no -16(%rbp)
+Teste 1:  
+v1 := $10
+p1 += v1;  
+p1 -= $10
+ret p1
+
+
+Casos testados na situação acima: Atribuição de Constante para Variável, Operações de Variáveis (soma e subtração) e Constantes para Parâmetro e Retorno de Parâmetro.
+Teste 2:  
+p1 := p2
+p1 *= $3
+v1 := p1  
+ret v1
+
+
+Casos testados na situação acima: Atribuição de Constante para Variável, Operações de Variáveis (multiplicação) ,Constantes para Parâmetro e Retorno de Variável.
+
+
+Considerações:
+* Retorno
+Constante: Funciona
+Variável : Funciona
+Parâmetro: Funciona
+* Atribuição (Para Variável)
+Constante: Funciona
+Variável : Funciona
+Parâmetro: Funciona
+* Atribuição (Para Parâmetro)
+Constante: Funciona
+Variável : Funciona
+Parâmetro: Funciona
+* Operações (Para Variável)
+Constante: Funciona
+Variável : Funciona
+Parâmetro: Funciona
+* Operações (Para Parâmetro)
+Constante: Funciona
+Variável : Funciona
+Parâmetro: Funciona
+* GO : Funciona
+
+
+* IF : Não Implementado
